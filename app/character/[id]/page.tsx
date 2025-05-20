@@ -24,12 +24,18 @@ export default async function CharacterPage({ params }: Props) {
     const character = await getCharacter(params.id);
 
     return (
-        <main>
-            <h1>{character.name}</h1>
-            <img src={character.image} alt={character.name} width={150}/>
-            <p>Status: {character.status}</p>
-            <p>Espécie: {character.species}</p>
-            <p>Gênero: {character.gender}</p>
+        <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
+            <div className="bg-white shadow-lg rounded-xl p-6 max-w-sm text-center">
+                <h1 className="text-2xl font-bold mt-4 text-gray-600">{character.name}</h1>
+                <img 
+                    src={character.image} 
+                    alt={character.name} 
+                    className="w-48 h-48 mx-auto rounded-full border-4 border-green-500"
+                />
+                <p className="text-gray-600">Status: {character.status}</p>
+                <p className="text-gray-600">Espécie: {character.species}</p>
+                <p className="text-gray-600">Gênero: {character.gender}</p>
+            </div>
         </main>
     )
 }
