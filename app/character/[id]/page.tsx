@@ -7,12 +7,12 @@ type Character = {
     image: string;
 };
 
-export default async function CharacterPage({ params, }: { params: { id: string };
-}) {
-    const res = await fetch(`https://rickandmortyapi.com/api/character/${params.id}`);
+export default async function CharacterPage({ params }: { params: Promise<{ id: string }>}) {
+    const { id } = await params;
+    const res = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
 
     if (!res.ok) {
-        throw new Error(`Erro ao buscar personagem com id ${params.id}`);
+        throw new Error(`Erro ao buscar personagem com id ${id}`);
     }
 
     const character: Character = await res.json();
