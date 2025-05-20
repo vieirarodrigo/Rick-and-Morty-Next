@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 type Character = {
   id: number;
   name: string;
@@ -7,6 +9,7 @@ type Character = {
 async function getCharacter(): Promise<Character[]> {
   const res = await fetch('https://rickandmortyapi.com/api/character');
   const data = await res.json();
+
   return data.results;
 }
 
@@ -19,8 +22,10 @@ export default async function HomePage() {
       <ul>
         {characters.map((char) => (
           <li key={char.id}>
+            <Link href={`/character/${char.id}`}>
             <img src={char.image} alt={char.name} width={50} />
             {char.name}
+            </Link>
           </li>
         ))}
       </ul>
