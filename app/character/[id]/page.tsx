@@ -20,8 +20,8 @@ async function getCharacter(id: string): Promise<Character> {
     return data;
 }
 
-export default async function CharacterPage({ params }: Props) {
-    const character = await getCharacter(params.id);
+export default async function Page({ params: { id } }: Props) {
+    const character = await getCharacter(id);
 
     return (
         <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
