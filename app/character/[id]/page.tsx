@@ -7,21 +7,15 @@ type Character = {
     image: string;
 };
 
-type Props = {
-    params: {
-        id: string;
-    };
-};
+export default async function CharacterPage({ params, }: { params: { id: string };
+}) {
+    const res = await fetch(`https://rickandmortyapi.com/api/character/${params.id}`);
 
-async function getCharacter(id: string): Promise<Character> {
-    const res = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
-    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(`Erro ao buscar personagem com id ${params.id}`);
+    }
 
-    return data;
-}
-
-export default async function Page({ params: { id } }: Props) {
-    const character = await getCharacter(id);
+    const character: Character = await res.json();
 
     return (
         <main className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-8">
